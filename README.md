@@ -1,5 +1,8 @@
 # 교회학교 암송 어플 (Church School Memorization App)
 
+[![Build Status](https://github.com/Kim-Hakseong/church-school-app/workflows/Flutter%20CI/badge.svg)](https://github.com/Kim-Hakseong/church-school-app/actions)
+[![Last Commit](https://img.shields.io/github/last-commit/Kim-Hakseong/church-school-app)](https://github.com/Kim-Hakseong/church-school-app/commits/main)
+
 Flutter 하이브리드 앱으로 개발된 교회학교 암송구절 관리 애플리케이션입니다.
 
 ## 프로젝트 개요
@@ -79,11 +82,17 @@ lib/
 - Android Studio (Android 빌드 시)
 - Xcode (iOS 빌드 시)
 
-### 설치 및 실행
+### 빠른 시작 (Quick Start)
+
+**사전 요구사항:**
+- [Flutter 3.22.0+](https://flutter.dev/docs/get-started/install) 설치
+- Android Studio (Android 개발용) 또는 Xcode (iOS 개발용)
+
+**설치 및 실행:**
 
 1. **저장소 클론**
 ```bash
-git clone <repository-url>
+git clone https://github.com/Kim-Hakseong/church-school-app.git
 cd church_school_app
 ```
 
@@ -204,6 +213,14 @@ class Event {
 3. **빌드 오류**
    - `flutter packages pub run build_runner clean` 후 재빌드
    - 캐시 삭제: `flutter clean`
+
+## 빌드 아티팩트
+
+CI/CD를 통해 자동으로 빌드된 아티팩트는 [GitHub Actions](https://github.com/Kim-Hakseong/church-school-app/actions) 페이지에서 다운로드할 수 있습니다:
+
+- **Android APK**: `release-apk` 아티팩트
+- **Web Build**: `release-web` 아티팩트
+- **iOS Build**: 향후 인증서 설정 후 제공 예정
 
 ## 라이선스
 
