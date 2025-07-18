@@ -27,7 +27,7 @@ class ExcelLoader {
             final verseCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row));
             final dateCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row));
             
-            if (verseCell?.value != null && dateCell?.value != null) {
+            if (verseCell.value != null && dateCell.value != null) {
               final verseText = verseCell.value.toString();
               final dateValue = dateCell.value;
               
@@ -42,7 +42,7 @@ class ExcelLoader {
                 verses.add(Verse(
                   date: date,
                   text: verseText,
-                  extra: lessonCell?.value?.toString(),
+                  extra: lessonCell.value?.toString(),
                 ));
               }
             }
@@ -80,7 +80,7 @@ class ExcelLoader {
             final verseCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row));
             final dateCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row));
             
-            if (lessonCell?.value != null && dateCell?.value != null) {
+            if (lessonCell.value != null && dateCell.value != null) {
               final lessonName = lessonCell.value.toString();
               final dateValue = dateCell.value;
               
@@ -95,7 +95,7 @@ class ExcelLoader {
                 events.add(Event(
                   date: date,
                   title: '$sheetName - $lessonName',
-                  note: verseCell?.value?.toString(),
+                  note: verseCell.value?.toString(),
                 ));
               }
             }
