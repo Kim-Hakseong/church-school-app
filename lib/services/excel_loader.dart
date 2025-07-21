@@ -1,4 +1,5 @@
 import 'package:excel/excel.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../models/verse.dart';
 import '../models/event.dart';
@@ -47,7 +48,7 @@ class ExcelLoader {
               }
             }
           } catch (e) {
-            print('Error parsing row $row in sheet $sheetName: $e');
+            debugPrint('Error parsing row $row in sheet $sheetName: $e');
           }
         }
         
@@ -56,7 +57,7 @@ class ExcelLoader {
       
       return result;
     } catch (e) {
-      print('Error loading Excel file: $e');
+      debugPrint('Error loading Excel file: $e');
       return {};
     }
   }
@@ -100,14 +101,14 @@ class ExcelLoader {
               }
             }
           } catch (e) {
-            print('Error parsing event row $row in sheet $sheetName: $e');
+            debugPrint('Error parsing event row $row in sheet $sheetName: $e');
           }
         }
       }
       
       return events;
     } catch (e) {
-      print('Error loading events: $e');
+      debugPrint('Error loading events: $e');
       return [];
     }
   }

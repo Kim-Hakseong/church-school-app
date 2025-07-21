@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/verse.dart';
 import '../models/event.dart';
@@ -37,7 +38,7 @@ class VerseRepository {
       await eventsBox.put('all_events', {'events': eventsJson});
       
     } catch (e) {
-      print('Error loading and caching data: $e');
+      debugPrint('Error loading and caching data: $e');
       rethrow;
     }
   }
@@ -54,7 +55,7 @@ class VerseRepository {
       final List<dynamic> versesJson = data['verses'];
       return versesJson.map((json) => Verse.fromJson(Map<String, dynamic>.from(json))).toList();
     } catch (e) {
-      print('Error getting verses for sheet $sheetName: $e');
+      debugPrint('Error getting verses for sheet $sheetName: $e');
       return [];
     }
   }
@@ -71,7 +72,7 @@ class VerseRepository {
       final List<dynamic> eventsJson = data['events'];
       return eventsJson.map((json) => Event.fromJson(Map<String, dynamic>.from(json))).toList();
     } catch (e) {
-      print('Error getting events: $e');
+      debugPrint('Error getting events: $e');
       return [];
     }
   }

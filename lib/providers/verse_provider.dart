@@ -7,7 +7,7 @@ import '../utils/date_utils.dart';
 class VerseProvider with ChangeNotifier {
   bool _isLoading = false;
   String? _error;
-  Map<String, List<Verse>> _allVerses = {};
+  final Map<String, List<Verse>> _allVerses = {};
   List<Event> _allEvents = [];
   
   bool get isLoading => _isLoading;

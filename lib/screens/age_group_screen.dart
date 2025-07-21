@@ -8,10 +8,10 @@ class AgeGroupScreen extends StatelessWidget {
   final String displayName;
   
   const AgeGroupScreen({
-    Key? key,
+    super.key,
     required this.sheetName,
     required this.displayName,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
