@@ -58,38 +58,63 @@ class AgeGroupScreen extends StatelessWidget {
         
         return RefreshIndicator(
           onRefresh: () => provider.refresh(),
-          child: ListView(
-            padding: const EdgeInsets.all(8.0),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  '$displayName 암송구절',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final screenHeight = constraints.maxHeight;
+              final isCompact = screenHeight < 700;
+              
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: isCompact ? 8.0 : 16.0,
                 ),
-              ),
-              VerseCard(
-                title: '지난주 말씀',
-                weekType: WeekType.last,
-                sheetName: sheetName,
-                provider: provider,
-              ),
-              VerseCard(
-                title: '이번주 말씀',
-                weekType: WeekType.current,
-                sheetName: sheetName,
-                provider: provider,
-              ),
-              VerseCard(
-                title: '다음주 말씀',
-                weekType: WeekType.next,
-                sheetName: sheetName,
-                provider: provider,
-              ),
-            ],
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: screenHeight),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: isCompact ? 8.0 : 16.0,
+                          bottom: isCompact ? 12.0 : 20.0,
+                        ),
+                        child: Text(
+                          '$displayName 암송구절',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            VerseCard(
+                              title: '지난주 말씀',
+                              weekType: WeekType.last,
+                              sheetName: sheetName,
+                              provider: provider,
+                            ),
+                            VerseCard(
+                              title: '이번주 말씀',
+                              weekType: WeekType.current,
+                              sheetName: sheetName,
+                              provider: provider,
+                            ),
+                            VerseCard(
+                              title: '다음주 말씀',
+                              weekType: WeekType.next,
+                              sheetName: sheetName,
+                              provider: provider,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         );
       },
