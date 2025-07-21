@@ -148,7 +148,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         return Card(
           margin: const EdgeInsets.only(bottom: 8),
           child: ListTile(
-            leading: const Icon(Icons.event, color: Colors.blue),
+            leading: Icon(Icons.event, color: Theme.of(context).colorScheme.primary),
             title: Text(event.title),
             subtitle: event.note != null ? Text(event.note!) : null,
             onTap: () => _showEventDialog(context, event.date, [event]),

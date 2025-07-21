@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'providers/verse_provider.dart';
 import 'screens/calendar_screen.dart';
 import 'screens/age_group_screen.dart';
@@ -18,9 +19,22 @@ class ChurchSchoolApp extends StatelessWidget {
       child: MaterialApp(
         title: '교회학교 암송 어플',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFFE8E2D4),
+            brightness: Brightness.light,
+          ).copyWith(
+            primary: const Color(0xFF8B7355),
+            secondary: const Color(0xFFA8C8EC),
+            surface: const Color(0xFFF5F3F0),
+            surfaceContainerHighest: const Color(0xFFEDE8E0),
+          ),
           useMaterial3: true,
-          fontFamily: 'NotoSans',
+          textTheme: GoogleFonts.notoSansKrTextTheme(),
+          cardTheme: const CardTheme(
+            elevation: 2,
+            shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+          ),
         ),
         home: const MainScreen(),
         debugShowCheckedModeBanner: false,
@@ -66,10 +80,10 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.church,
                 size: 100,
-                color: Colors.blue,
+                color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(height: 24),
               const CircularProgressIndicator(),
@@ -129,32 +143,47 @@ class _MainScreenState extends State<MainScreen> {
               AgeGroupScreen(sheetName: '중고등부', displayName: '중고등부'),
             ],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today),
-                label: '교회학교 캘린더',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.child_care),
-                label: '유치부',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.school),
-                label: '초등부',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.groups),
-                label: '중고등부',
-              ),
-            ],
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.1),
+                  blurRadius: 8,
+                  offset: Offset(0, -2),
+                ),
+              ],
+            ),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _currentIndex,
+              selectedItemColor: Theme.of(context).colorScheme.primary,
+              unselectedItemColor: Colors.grey[600],
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              elevation: 0,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_today),
+                  label: '교회학교 캘린더',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.child_care),
+                  label: '유치부',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.school),
+                  label: '초등부',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.groups),
+                  label: '중고등부',
+                ),
+              ],
+            ),
           ),
         );
       },
