@@ -71,6 +71,7 @@ class AgeGroupScreen extends StatelessWidget {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: screenHeight),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
@@ -86,29 +87,27 @@ class AgeGroupScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      Flexible(
-                        child: Column(
-                          children: [
-                            VerseCard(
-                              title: '지난주 말씀',
-                              weekType: WeekType.last,
-                              sheetName: sheetName,
-                              provider: provider,
-                            ),
-                            VerseCard(
-                              title: '이번주 말씀',
-                              weekType: WeekType.current,
-                              sheetName: sheetName,
-                              provider: provider,
-                            ),
-                            VerseCard(
-                              title: '다음주 말씀',
-                              weekType: WeekType.next,
-                              sheetName: sheetName,
-                              provider: provider,
-                            ),
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          VerseCard(
+                            title: '지난주 말씀',
+                            weekType: WeekType.last,
+                            sheetName: sheetName,
+                            provider: provider,
+                          ),
+                          VerseCard(
+                            title: '이번주 말씀',
+                            weekType: WeekType.current,
+                            sheetName: sheetName,
+                            provider: provider,
+                          ),
+                          VerseCard(
+                            title: '다음주 말씀',
+                            weekType: WeekType.next,
+                            sheetName: sheetName,
+                            provider: provider,
+                          ),
+                        ],
                       ),
                     ],
                   ),
