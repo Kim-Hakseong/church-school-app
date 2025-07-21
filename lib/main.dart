@@ -30,7 +30,7 @@ class ChurchSchoolApp extends StatelessWidget {
           ),
           useMaterial3: true,
           textTheme: GoogleFonts.notoSansKrTextTheme(),
-          cardTheme: const CardTheme(
+          cardTheme: const CardThemeData(
             elevation: 2,
             shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
