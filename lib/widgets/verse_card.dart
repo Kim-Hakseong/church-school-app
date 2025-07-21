@@ -9,12 +9,12 @@ class VerseCard extends StatelessWidget {
   final VerseProvider provider;
   
   const VerseCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.weekType,
     required this.sheetName,
     required this.provider,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {

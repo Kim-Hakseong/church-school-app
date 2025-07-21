@@ -1,4 +1,5 @@
 import 'package:excel/excel.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../models/verse.dart';
 import '../models/event.dart';
@@ -27,7 +28,7 @@ class ExcelLoader {
             final verseCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row));
             final dateCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row));
             
-            if (verseCell?.value != null && dateCell?.value != null) {
+            if (verseCell.value != null && dateCell.value != null) {
               final verseText = verseCell.value.toString();
               final dateValue = dateCell.value;
               
@@ -42,12 +43,12 @@ class ExcelLoader {
                 verses.add(Verse(
                   date: date,
                   text: verseText,
-                  extra: lessonCell?.value?.toString(),
+                  extra: lessonCell.value?.toString(),
                 ));
               }
             }
           } catch (e) {
-            print('Error parsing row $row in sheet $sheetName: $e');
+            debugPrint('Error parsing row $row in sheet $sheetName: $e');
           }
         }
         
@@ -56,7 +57,7 @@ class ExcelLoader {
       
       return result;
     } catch (e) {
-      print('Error loading Excel file: $e');
+      debugPrint('Error loading Excel file: $e');
       return {};
     }
   }
@@ -80,7 +81,7 @@ class ExcelLoader {
             final verseCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row));
             final dateCell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row));
             
-            if (lessonCell?.value != null && dateCell?.value != null) {
+            if (lessonCell.value != null && dateCell.value != null) {
               final lessonName = lessonCell.value.toString();
               final dateValue = dateCell.value;
               
@@ -95,19 +96,19 @@ class ExcelLoader {
                 events.add(Event(
                   date: date,
                   title: '$sheetName - $lessonName',
-                  note: verseCell?.value?.toString(),
+                  note: verseCell.value?.toString(),
                 ));
               }
             }
           } catch (e) {
-            print('Error parsing event row $row in sheet $sheetName: $e');
+            debugPrint('Error parsing event row $row in sheet $sheetName: $e');
           }
         }
       }
       
       return events;
     } catch (e) {
-      print('Error loading events: $e');
+      debugPrint('Error loading events: $e');
       return [];
     }
   }

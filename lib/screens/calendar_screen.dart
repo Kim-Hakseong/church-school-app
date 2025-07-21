@@ -6,7 +6,7 @@ import '../providers/verse_provider.dart';
 import '../models/event.dart';
 
 class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+  const CalendarScreen({super.key});
   
   @override
   State<CalendarScreen> createState() => _CalendarScreenState();
