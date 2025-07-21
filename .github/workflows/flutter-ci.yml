@@ -51,25 +51,42 @@ jobs:
         name: release-web
         path: build/web/
 
-  # TODO: iOS build requires proper Runner ID configuration
-  # Uncomment and configure when iOS certificates are set up
-  # build-ios:
-  #   runs-on: macos-latest
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #   - name: Setup Flutter
-  #     uses: subosito/flutter-action@v2
-  #     with:
-  #       flutter-version: '3.22.0'
-  #       cache: true
-  #   - name: Get dependencies
-  #     run: flutter pub get
-  #   - name: Generate code
-  #     run: flutter packages pub run build_runner build --delete-conflicting-outputs
-  #   - name: Build iOS
-  #     run: flutter build ios --release --no-codesign
-  #   - name: Upload IPA artifact
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: release-ios
-  #       path: build/ios/iphoneos/Runner.app
+  build-ios:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.0'
+        cache: true
+        cache-key: flutter-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+        cache-path: ${{ runner.tool_cache }}/flutter
+    
+    - name: Get dependencies
+      run: flutter pub get
+    
+    - name: Generate code
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
+    
+    - name: Analyze project source
+      run: flutter analyze --no-fatal-infos
+    
+    - name: Run tests
+      run: flutter test
+    
+    - name: Build iOS (no codesign)
+      run: flutter build ios --release --no-codesign
+    
+    - name: Create iOS Archive
+      run: |
+        cd build/ios/iphoneos
+        zip -r ../../../ios-app.zip Runner.app
+    
+    - name: Upload iOS artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-ios
+        path: ios-app.zip
